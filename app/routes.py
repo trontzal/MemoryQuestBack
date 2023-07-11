@@ -13,7 +13,6 @@ def get_usuarios():
     usuarios = cursor.fetchall()
     cursor.close()
 
-
     return str(usuarios)
 
 
