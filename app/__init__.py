@@ -1,7 +1,9 @@
 from flask import Flask, jsonify, request
 import mysql.connector
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 app.config['SECRET_KEY'] = 'claveSecreta'
 
 #configuracion bbdd
