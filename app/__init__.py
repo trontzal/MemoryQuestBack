@@ -9,10 +9,10 @@ app.config['SECRET_KEY'] = 'claveSecreta'
 #configuracion bbdd
 db_config ={
     'user' : 'root',
-    'password' : 'Uz6Tc26jqMT7lPo8GMnB',
-    'host' : 'containers-us-west-115.railway.app',
+    'password' : 'seTn1IysNMRTCaeniSW4',
+    'host' : 'containers-us-west-152.railway.app',
     'database' : 'railway',
-    'port' : 6714
+    'port' : 5800
 }
 
 try:
