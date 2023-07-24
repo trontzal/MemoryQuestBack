@@ -135,3 +135,22 @@ def obtener_puntuaciones(id_juego):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route("/puntuaciones/<string:id_juego>", methods=['GET'])
+def read_por_juego(id_juego):
+    cursor = db_connection.cursor()
+    query = "SELECT * FROM puntuaciones WHERE id_juego = %s"
+    cursor.execute(query, (id_juego,))
+    datos =cursor.fetchall()
+    cursor.close()
+    resultados = []
+    for dato in datos:
+        resultado = {
+            'id': dato[0],
+            'usuario': dato[1],
+            'puntos': dato[2],
+            'tipo_de_juego': dato[3]
+        }
+        resultados.append(resultado)
+    
+    return jsonify(resultados)
+
