@@ -110,7 +110,28 @@ def ver_puntuaciones():
     cursor = db_connection.cursor()
     query = "SELECT * FROM puntuaciones"
     cursor.execute(query) 
-    usuarios = cursor.fetchall()
+    puntos = cursor.fetchall()
     cursor.close()
 
-    return str(usuarios)
+    return str(puntos)
+
+@app.route('/grafico/<string:id_juego>', methods=['GET'])
+def obtener_puntuaciones(id_juego):
+    try:
+        cursor = db_connection.cursor()
+        query = "SELECT puntuacion, COUNT(*) AS repeticiones FROM puntuaciones WHERE id_juego = %s GROUP BY puntuacion"
+        cursor.execute(query, (id_juego,))
+        puntuaciones = cursor.fetchall()
+        cursor.close()
+
+        grafica = []
+        for dato in puntuaciones:
+            grafica.append({
+                'x': dato[0],
+                'y': dato[1]
+            })
+
+        return jsonify(grafica)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
